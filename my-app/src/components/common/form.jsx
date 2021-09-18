@@ -60,7 +60,7 @@ class Form extends Component {
     this.whenSubmit();
 
     if (!this.whenSubmit) {
-      throw new Error("Access Denied");
+      throw new Error("Access Denied!");
     }
   };
 

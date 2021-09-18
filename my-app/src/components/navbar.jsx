@@ -58,6 +58,13 @@ const Navbar = ({ user }) => {
                 </NavLink>
               )}
             </li>
+            {/* <li>
+              {user &&  (
+                <NavLink className="nav-link" to="/my-cards">
+                  My Cards
+                </NavLink>
+              )}
+            </li> */}
           </ul>
         </div>
       </div>

@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import SignupBiz from "./components/signupBiz";
 import CreateCard from "./components/createCard";
+import MyCards from "./components/myCards";
 
 // import userService, { logout } from "./services/userService";
 // import Footer from "./components/footer";
@@ -39,6 +40,7 @@ class App extends Component {
           <ToastContainer />
           <Switch>
             <Route path="/signup" component={Signup} exact />
+            <Route path="/my-cards" component={MyCards} exact />
             <Route path="/signin" component={Signin} exact />
             <Route path="/create-card" component={CreateCard} exact />
             <Route path="/logout" component={Logout} exact />
