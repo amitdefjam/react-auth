@@ -61,9 +61,9 @@ class MyCards extends Component {
         </div>
         <div className="row">
           <div className="col-12">
-            <button type="button" className="btn btn-secondary mt-2">
-              <Link className="text-white" to="/create-card">
-                Create New Card +
+            <button type="button" className="btn btn-outline-success mt-2">
+              <Link to="/create-card">
+                <i class="bi bi-patch-plus-fill"></i> Create New Card
               </Link>
             </button>
           </div>

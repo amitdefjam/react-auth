@@ -108,7 +108,7 @@ class Form extends Component {
   renderButtonSubmit(label) {
     return (
       <>
-        <button className="btn btn-primary float-start">{label}</button>
+        <button className="btn btn-success float-start">{label}</button>
       </>
     );
   }

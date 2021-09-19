@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Card = ({
   card: { _id, bizName, bizDescription, bizAddress, bizPhone, bizImage },
   onDelete,
@@ -27,8 +29,15 @@ const Card = ({
               {bizAddress}
             </a>
           </div>
-          <button className="btn btn-danger" onClick={onDelete}>
-            Delete
+          <div className="card-text border-top pt-3 mt-2">
+            <Link to={`my-cards/edit-card/${_id}`}>
+              <button className="btn btn-warning float-start">
+                <i className="bi bi-pencil-fill"></i> Edit
+              </button>
+            </Link>
+          </div>
+          <button className="btn btn-danger float-end" onClick={onDelete}>
+            <i class="bi bi-trash-fill"></i> Delete
           </button>
         </div>
       </div>

@@ -25,6 +25,13 @@ const Navbar = ({ user }) => {
                 About
               </NavLink>
             </li>
+            {user?.biz && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/my-cards">
+                  My Cards
+                </NavLink>
+              </li>
+            )}
           </ul>
           <ul className="navbar-nav ms-auto mb-2 mb-md-0">
             <li className="nav-item">
@@ -58,13 +65,6 @@ const Navbar = ({ user }) => {
                 </NavLink>
               )}
             </li>
-            {/* <li>
-              {user &&  (
-                <NavLink className="nav-link" to="/my-cards">
-                  My Cards
-                </NavLink>
-              )}
-            </li> */}
           </ul>
         </div>
       </div>

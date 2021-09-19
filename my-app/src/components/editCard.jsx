@@ -1,12 +1,12 @@
-import PageHeader from "./common/pageHeader";
 import React from "react";
+import Form from "./common/form";
 import Joi from "joi";
 import cardService from "../services/cardService";
 import { toast } from "react-toastify";
-import Form from "./common/form";
+import PageHeader from "./common/pageHeader";
 import { Link } from "react-router-dom";
 
-class CreateCard extends Form {
+class EditCard extends Form {
   state = {
     form: {
       bizName: "",
@@ -19,6 +19,7 @@ class CreateCard extends Form {
   };
 
   schema = {
+    _id: Joi.string(),
     bizName: Joi.string().min(2).max(255).required().label("name"),
     bizDescription: Joi.string()
       .min(2)
@@ -35,36 +36,40 @@ class CreateCard extends Form {
     bizImage: Joi.string().min(11).max(1024).uri().allow("").label("image"),
   };
 
-  async whenSubmit() {
+  async componentDidMount() {
+    const id = this.props.match.params.id;
     const {
-      form: { bizImage, ...body },
-    } = this.state;
+      data: { _id, bizDescription, bizAddress, bizName, bizPhone, bizImage },
+    } = await cardService.getCard(id);
 
-    if (bizImage) {
-      body.bizImage = bizImage;
-    }
+    this.setState({
+      form: {
+        _id,
+        bizName,
+        bizDescription,
+        bizAddress,
+        bizPhone,
+        bizImage,
+      },
+    });
+  }
 
-    try {
-      await cardService.createCard(body);
-      toast.success("business created");
-      this.props.history.push("/my-cards");
-    } catch ({ response }) {
-      if (response && response.status === 400) {
-        console.log(response.data, "asdssdasda");
-        this.setState({ errors: { bizImage: response.data } });
-      }
-    }
+  async whenSubmit() {
+    const { form: card } = this.state;
+    await cardService.editCard(card);
+    toast.success("card has been updated");
+    this.props.history.replace("/my-cards");
   }
 
   render() {
     return (
       <>
-        <PageHeader title="Create your own Check Legit Business" />
+        <PageHeader title="Edit Card" />
         <div className="row">
           <div className="col-12">
             <h4>
-              <i className="bi bi-card-checklist text-success"></i> Create your
-              own card please.
+              <i className="bi bi-card-checklist text-success"></i> Edit your
+              card please...
             </h4>
           </div>
         </div>
@@ -74,11 +79,10 @@ class CreateCard extends Form {
           {this.renderInput("bizAddress", "Address", "text", true)}
           {this.renderInput("bizPhone", "Phone Number", "tel", true)}
           {this.renderInput("bizImage", "Business Image", "text", false)}
-
           <div className="mt-2">
-            {this.renderButtonSubmit("Create Card")}
+            {this.renderButtonSubmit("Save")}
             {this.renderButtonReset("Reset")}
-            <Link to="/my-cards" className="ms-2 btn btn-danger float-end">
+            <Link to=".." className="ms-2 btn btn-danger">
               Cancel
             </Link>
           </div>
@@ -88,4 +92,4 @@ class CreateCard extends Form {
   }
 }
 
-export default CreateCard;
+export default EditCard;
